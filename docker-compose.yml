@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Development service with CMS
+  dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"  # Next.js dev server
+      - "8081:8081"  # CMS local backend proxy
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+    command: npm run dev:cms
+    stdin_open: true
+    tty: true
+
+  # Production service
+  prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production

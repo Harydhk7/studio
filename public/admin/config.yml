@@ -1,0 +1,74 @@
+# GitHub backend configuration for production
+backend:
+  name: github
+  repo: "Harydhk7/studio"
+  branch: "main"
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "home"
+    label: "Home"
+    files:
+      - file: "content/home.json"
+        label: "Home content"
+        name: "home"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "string"}
+          - {label: "Hero image", name: "heroImage", widget: "image"}
+          - {label: "CTA text", name: "ctaText", widget: "string"}
+          - {label: "CTA link", name: "ctaLink", widget: "string"}
+          - {label: "About", name: "about", widget: "text"}
+
+  - name: "services"
+    label: "Services"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Image", name: "image", widget: "image"}
+
+  - name: "packages"
+    label: "Packages"
+    folder: "content/packages"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Price", name: "price", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+
+  - name: "team"
+    label: "Team"
+    folder: "content/team"
+    create: true
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Role", name: "role", widget: "string"}
+      - {label: "Photo", name: "photo", widget: "image"}
+
+  - name: "works"
+    label: "Works"
+    folder: "content/works"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "siteSettings"
+    label: "Site Settings"
+    files:
+      - file: "content/siteSettings.json"
+        label: "Site Settings"
+        name: "siteSettings"
+        fields:
+          - {label: "Site title", name: "title", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Address", name: "address", widget: "text"}
