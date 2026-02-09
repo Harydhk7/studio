@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "title": "HELLO, WE ARE GLAD YOU FOUND US!",
   "subtitle": "Welcome to SpotFreeze Photography",
   "heroImage": "/images/placeholder.png",
@@ -35,3 +36,12 @@
     }
   ]
 }
+=======
+  "title": "SPOT FREEZE PHTOGRAPHY",
+  "subtitle": "We design and build beautiful products",
+  "heroImage": "/images/spot-freeze-logo-4-1-.png",
+  "ctaText": "Work With Us",
+  "ctaLink": "/contact",
+  "about": "We are a small studio focused on design, development and brand strategy. Edit this content via the CMS."
+}
+>>>>>>> b4526912ca18686ee9c1027252023df79b3a5db4

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "title": "SpotFreeze Photography",
   "tagline": "Transforming genuine happiness into eternal imagery",
   "email": "hello@spotfreeze.in",
@@ -12,3 +13,10 @@
     "whatsapp": "https://wa.me/919840767566"
   }
 }
+=======
+  "title": "Spot freeze photography",
+  "email": "spotfreezephotography@gmail.com",
+  "phone": "6369751267",
+  "address": "Manavalanagar, tiruvallur."
+}
+>>>>>>> b4526912ca18686ee9c1027252023df79b3a5db4
