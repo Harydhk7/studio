@@ -3,16 +3,16 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export const metadata = {
-  title: 'Studio',
-  description: 'Studio website managed with Decap CMS'
+  title: 'SpotFreeze Photography - Wedding Photographer',
+  description: 'Professional wedding photography capturing authentic moments across diverse cultures and traditions'
 }
 
 export default function RootLayout({children}){
   return (
     <html lang="en">
-      <body>
+      <body className="bg-white">
         <Navbar />
-        <main className="container py-8">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

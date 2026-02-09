@@ -1,0 +1,42 @@
+{
+  "locations": [
+    {
+      "city": "Chennai",
+      "address": "52/41, Tirumurthy Nagar, Nungambakkam, Chennai, Tamil Nadu 600034",
+      "phone": "+91-9840767566",
+      "email": "hello@spotfreeze.in"
+    },
+    {
+      "city": "Bangalore",
+      "address": "Second floor, Smart Avenue, No.28, Residency Road, Ashok Nagar, Bengaluru 560025",
+      "phone": "+91-8123456789",
+      "email": "bangalore@spotfreeze.in"
+    },
+    {
+      "city": "Vellore",
+      "address": "No 61, Vellore-Katpadi main road, Vellore, Tamil Nadu 632007",
+      "phone": "+91-9840767566",
+      "email": "vellore@spotfreeze.in"
+    },
+    {
+      "city": "Hyderabad",
+      "address": "Road no. 2 Banjara Hills, Hyderabad, Telangana 500034",
+      "phone": "+91-9876543210",
+      "email": "hyderabad@spotfreeze.in"
+    }
+  ],
+  "serviceCategories": [
+    {
+      "name": "Traditional Weddings",
+      "subcategories": ["Brahmin Wedding", "Christian Wedding", "Muslim Wedding", "Telugu Wedding", "Malayali Wedding", "North-Indian Wedding"]
+    },
+    {
+      "name": "Photography Services",
+      "subcategories": ["Engagement Photography", "Pre-Wedding Shoots", "Post-Wedding Shoots", "Candid Photography", "Bridal Portraits", "Couple Portraits"]
+    },
+    {
+      "name": "Video Services",
+      "subcategories": ["Candid Wedding Films", "Outdoor Wedding Films", "Short Stories"]
+    }
+  ]
+}

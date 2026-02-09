@@ -1,8 +1,37 @@
 {
-  "title": "Creative Studio",
-  "subtitle": "We design and build beautiful products",
+  "title": "HELLO, WE ARE GLAD YOU FOUND US!",
+  "subtitle": "Welcome to SpotFreeze Photography",
   "heroImage": "/images/placeholder.png",
-  "ctaText": "Work With Us",
+  "ctaText": "Book Us Now",
   "ctaLink": "/contact",
-  "about": "We are a small studio focused on design, development and brand strategy. Edit this content via the CMS."
+  "about": "We are a team of passionate photographers specializing in wedding photography, candid moments, and pre-wedding shoots. We capture emotions and create timeless memories that you'll cherish forever.",
+  "tagline": "Transforming genuine happiness into eternal imagery",
+  "stats": [
+    {"label": "Locations", "value": "8"},
+    {"label": "Weddings", "value": "500+"},
+    {"label": "Employees", "value": "25+"},
+    {"label": "Years of Experience", "value": "10+"}
+  ],
+  "whyChooseUs": [
+    {
+      "title": "Storytelling, Not Just Pictures",
+      "description": "We weave love stories into every frame, creating visuals that feel authentic and timeless."
+    },
+    {
+      "title": "Candid Moments, Genuine Emotions",
+      "description": "Specializing in unscripted smiles, laughter, and tears - preserving emotions that last a lifetime."
+    },
+    {
+      "title": "Premium Quality & Creativity",
+      "description": "From high-end gear to expert editing, every photo is crafted with luxury and artistry."
+    },
+    {
+      "title": "Experience Across Cultures & Traditions",
+      "description": "From destination weddings to traditional ceremonies, we capture every culture with respect and beauty."
+    },
+    {
+      "title": "Professional & Personal Touch",
+      "description": "We combine technical expertise with genuine care, making your wedding day stress-free and memorable."
+    }
+  ]
 }

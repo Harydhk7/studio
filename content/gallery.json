@@ -1,0 +1,101 @@
+{
+  "testimonials": [
+    {
+      "quote": "The pictures turned out beautiful! We got the complimentary frame and magazine and it is more than we imagined. We are so glad and astonished that we chose you for this very important moment in our life.",
+      "author": "Varalakshmi & Karthik",
+      "event": "Wedding Album"
+    },
+    {
+      "quote": "Thank you so much for such a beautiful collection of photos. There were so many stunning photos to choose from and I found it very difficult to decide on our favourites for the album. We have 80 photos to put forward.",
+      "author": "Ashikha & Surya",
+      "event": "Pre-Wedding Shoot"
+    },
+    {
+      "quote": "Best work! Best team! Excellent workmanship! Delivered on time. They're the best in what they do! Any occasion you want to remember for a lifetime, capture it through these lensmen and you'll cherish them forever.",
+      "author": "Dikshitha A Chandrasekar",
+      "event": "Wedding Photography"
+    },
+    {
+      "quote": "It was a wonderful experience with our team on my beautiful wedding occasion. They were really patient with all family moments and produced the most amazing photographs and best albums.",
+      "author": "Rina Joseph",
+      "event": "Wedding Album"
+    }
+  ],
+  "blogPosts": [
+    {
+      "title": "15 Easy & Effective Wedding Poses for Couple Portraits",
+      "excerpt": "Discover essential wedding poses that will make couple portraits timeless and beautiful. Our expert guide covers natural, romantic, and striking poses.",
+      "date": "January 26, 2026",
+      "image": "/images/placeholder.png",
+      "link": "/blog/wedding-poses-guide"
+    },
+    {
+      "title": "Elegant Wedding Reception Photography Tips",
+      "excerpt": "Master the art of wedding reception photography with our comprehensive guide on capturing candid moments, group shots, and romantic dances.",
+      "date": "January 26, 2026",
+      "image": "/images/placeholder.png",
+      "link": "/blog/reception-photography"
+    },
+    {
+      "title": "Top 21 Bridal Photography Poses for Bride-to-Be",
+      "excerpt": "Ultimate collection of bridal poses that will make you feel confident, beautiful, and cherished. Perfect for pre-wedding shoots and portraits.",
+      "date": "January 19, 2026",
+      "image": "/images/placeholder.png",
+      "link": "/blog/bridal-poses"
+    }
+  ],
+  "weddingTypes": [
+    {
+      "name": "Brahmin Wedding",
+      "description": "Capture the sacred traditions and celebrations",
+      "image": "/images/placeholder.png",
+      "link": "/wedding-photography/brahmin"
+    },
+    {
+      "name": "Christian Wedding",
+      "description": "Document the beauty of sacred vows",
+      "image": "/images/placeholder.png",
+      "link": "/wedding-photography/christian"
+    },
+    {
+      "name": "Muslim Wedding",
+      "description": "Preserve the joy and elegance of Islamic traditions",
+      "image": "/images/placeholder.png",
+      "link": "/wedding-photography/muslim"
+    },
+    {
+      "name": "Telugu Wedding",
+      "description": "Celebrate Telugu traditions and customs",
+      "image": "/images/placeholder.png",
+      "link": "/wedding-photography/telugu"
+    },
+    {
+      "name": "Malayali Wedding",
+      "description": "Honor Kerala's beautiful wedding heritage",
+      "image": "/images/placeholder.png",
+      "link": "/wedding-photography/malayali"
+    },
+    {
+      "name": "North-Indian Wedding",
+      "description": "Capture Punjabi and North-Indian celebrations",
+      "image": "/images/placeholder.png",
+      "link": "/wedding-photography/north-indian"
+    }
+  ],
+  "featuredWorks": [
+    {
+      "title": "Varalakshmi & Karthik's Love Story",
+      "description": "A sweet tale of love, from fighting as colleagues to falling in love. Their love story is no less of a Bollywood tale.",
+      "image": "/images/placeholder.png",
+      "date": "December 2025",
+      "link": "/works/varalakshmi-karthik"
+    },
+    {
+      "title": "Ashikha & Surya's Whirlwind Romance",
+      "description": "Wedding is a mix of emotions and this one is special. A one that's filled with joy, laughter and tears of joy.",
+      "image": "/images/placeholder.png",
+      "date": "December 2025",
+      "link": "/works/ashikha-surya"
+    }
+  ]
+}

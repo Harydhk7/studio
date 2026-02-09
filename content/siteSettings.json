@@ -1,6 +1,14 @@
 {
-  "title": "Creative Studio",
-  "email": "hello@studio.example",
-  "phone": "(555) 000-0000",
-  "address": "Studio address goes here"
+  "title": "SpotFreeze Photography",
+  "tagline": "Transforming genuine happiness into eternal imagery",
+  "email": "hello@spotfreeze.in",
+  "phone": "+91 9840767566",
+  "address": "Chennai | Bangalore | Hyderabad | Vellore",
+  "description": "Professional wedding photography studio capturing authentic moments across diverse cultures and traditions",
+  "socialLinks": {
+    "instagram": "https://instagram.com/spotfreezephotography",
+    "facebook": "https://facebook.com/spotfreeze",
+    "youtube": "https://youtube.com/@spotfreeze",
+    "whatsapp": "https://wa.me/919840767566"
+  }
 }
