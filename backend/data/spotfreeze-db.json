@@ -1,0 +1,105 @@
+{
+  "settings": {
+    "studioName": "Spot Freeze Photography",
+    "tagline": "Transforming genuine happiness into eternal imagery",
+    "email": "hello@spotfreeze.in",
+    "phone": "+91 98765 43210",
+    "instagram": "https://www.instagram.com/",
+    "heroImage": "/images/portfolio.jpeg"
+  },
+  "services": [
+    {
+      "id": "svc-wedding",
+      "title": "Wedding Photography",
+      "description": "Full-day ritual, candid, portrait, and reception coverage.",
+      "price": "Custom quote",
+      "active": true
+    },
+    {
+      "id": "svc-prewedding",
+      "title": "Pre-Wedding Shoots",
+      "description": "Location planning and relaxed couple portraits with a cinematic finish.",
+      "price": "Custom quote",
+      "active": true
+    },
+    { "id": "svc-engagement", "title": "Engagement Shoot", "description": "Celebrate your promise with expressive portraits and intimate details.", "price": "Custom quote", "active": true },
+    { "id": "svc-candid-video", "title": "Candid Videography", "description": "Natural, story-led coverage of the laughter, rituals, and in-between moments.", "price": "Custom quote", "active": true },
+    { "id": "svc-maternity", "title": "Maternity Shoot", "description": "Warm, graceful portraits that celebrate this beautiful chapter.", "price": "Custom quote", "active": true },
+    { "id": "svc-puberty", "title": "Puberty Shoot", "description": "Thoughtful portraits for a meaningful family milestone.", "price": "Custom quote", "active": true },
+    { "id": "svc-birthday", "title": "Birthday Party Shoot", "description": "Joyful birthday coverage for candid memories and family portraits.", "price": "Custom quote", "active": true },
+    { "id": "svc-model", "title": "Model Photography", "description": "Editorial, portfolio, and personal-brand photography with direction.", "price": "Custom quote", "active": true },
+    { "id": "svc-podcast", "title": "Podcast Shoot", "description": "Professional photo and video coverage for podcast episodes and content.", "price": "Custom quote", "active": true },
+    { "id": "svc-newborn", "title": "Newborn Baby Shoot", "description": "Gentle, carefully planned portraits for your newest family member.", "price": "Custom quote", "active": true },
+    { "id": "svc-corporate", "title": "Corporate Events", "description": "Polished photography for conferences, launches, teams, and company events.", "price": "Custom quote", "active": true },
+    { "id": "svc-video-editing", "title": "Candid Video Editing", "description": "Cinematic editing, colour, sound, and story shaping for event footage.", "price": "Custom quote", "active": true },
+    { "id": "svc-album", "title": "Album Design", "description": "Beautifully sequenced album layouts designed around your story.", "price": "Custom quote", "active": true },
+    { "id": "svc-reels", "title": "Reels Editing", "description": "Short-form edits crafted for celebrations, announcements, and social media.", "price": "Custom quote", "active": true },
+    { "id": "svc-frames", "title": "Photo Frames", "description": "Print and frame your favourite memories for a lasting display.", "price": "Custom quote", "active": true },
+    { "id": "svc-gifts", "title": "Wedding Gifts", "description": "Thoughtful wedding keepsakes and personalised gifts for your celebrations.", "price": "Custom quote", "active": true }
+  ],
+  "packages": [
+    {
+      "id": "pkg-classic",
+      "title": "Classic Wedding",
+      "price": "Rs. 55,000",
+      "features": "1 photographer, 1 videographer, edited photos, highlight reel",
+      "active": true
+    },
+    {
+      "id": "pkg-premium",
+      "title": "Premium Wedding",
+      "price": "Rs. 95,000",
+      "features": "Candid team, traditional team, teaser, album design, drone add-on ready",
+      "active": true
+    },
+    {
+      "id": "pkg-family",
+      "title": "Family Moments",
+      "price": "Rs. 18,000",
+      "features": "2-hour session, edited gallery, print-ready portraits",
+      "active": true
+    }
+  ],
+  "galleries": [
+    {
+      "id": "gal-wedding",
+      "title": "Wedding Stories",
+      "image": "/images/portfolio.jpeg",
+      "category": "Wedding",
+      "featured": true
+    },
+    {
+      "id": "gal-shower",
+      "title": "Baby Shower",
+      "image": "/images/babyshower.jpeg",
+      "category": "Family",
+      "featured": true
+    },
+    {
+      "id": "gal-baby",
+      "title": "Baby Shoot",
+      "image": "/images/babyshoot.jpeg",
+      "category": "Portrait",
+      "featured": true
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t-1",
+      "name": "Varalakshmi & Karthik",
+      "event": "Wedding Album",
+      "quote": "The pictures turned out beautiful. We are so glad we chose Spot Freeze.",
+      "active": true
+    },
+    {
+      "id": "t-2",
+      "name": "Ashikha & Surya",
+      "event": "Pre-Wedding Shoot",
+      "quote": "There were so many stunning photos to choose from. The team made it effortless.",
+      "active": true
+    }
+  ],
+  "enquiries": [],
+  "bookings": [],
+  "customers": []
+}

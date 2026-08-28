@@ -2,18 +2,18 @@
 
 # dependencies
 /node_modules
+/frontend/node_modules
+/backend/node_modules
 /.pnp
 .pnp.js
 
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
+/dist
+/frontend/dist
 
 # misc
 .DS_Store
@@ -28,10 +28,9 @@ yarn-error.log*
 .env*.local
 .env
 
-# vercel
+# deployment
 .vercel
 
-# typescript
+# generated files
 *.tsbuildinfo
-next-env.d.ts
 

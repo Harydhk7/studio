@@ -1,147 +1,42 @@
-# Studio Static Site (Next.js + Decap CMS)
+# Spot Freeze Photography
 
-This project is a production-ready static website scaffold built with Next.js (App Router), Tailwind CSS and Decap (Netlify) CMS for editing content stored in the repository.
+Spot Freeze is a Vite/React photography frontend with a small Express API for enquiries and studio administration.
 
-## Key Features
-- ✨ Static site using Next.js app router
-- 📝 Content stored in the `content/` folder as JSON and Markdown
-- 🎨 Decap CMS admin at `/admin` with local backend support
-- 🖼️ Media uploads to `public/images/`
-- 🐳 Docker support for easy local development
-- 🚀 Deploy on Vercel (recommended)
+## Project structure
 
----
+- `frontend/` - Vercel deployment. The Vite source is in `frontend/client`.
+- `backend/` - Render deployment. The Express API is in `backend/server` and persists data in `backend/data`.
 
-## 🚀 Quick Start
+## Local development
 
-### Option 1: Docker (Recommended - No Node.js Required!)
-
-**Easiest way:**
-1. Install Docker Desktop: https://www.docker.com/products/docker-desktop/
-2. Double-click `docker-start.bat` (Windows)
-3. Open http://localhost:3000
-
-**Or use command line:**
 ```powershell
-docker-compose up dev
-```
-
-📚 **See [README_DOCKER.md](README_DOCKER.md) for complete Docker guide**
-
----
-
-### Option 2: Node.js (Traditional)
-
-1. Install Node.js from https://nodejs.org/
-
-2. Install dependencies:
-```bash
 npm install
+npm run dev
 ```
 
-3. Run dev server with CMS:
-```bash
-npm run dev:cms
-```
+The frontend runs at `http://localhost:5173` and proxies `/api` to the API at `http://localhost:5000`.
 
-📚 **See [LOCAL_SETUP.md](LOCAL_SETUP.md) for complete setup guide**
+To install and run each deployment folder independently:
 
----
-
-## 📝 Using the CMS
-
-**Local Development:**
-- Open http://localhost:3000/admin
-- The CMS is pre-configured with local backend (no GitHub auth needed!)
-- Edit content and it saves directly to `content/` folder
-
-**Production with GitHub:**
-- Update `public/admin/config.yml` to use GitHub backend
-- See [LOCAL_SETUP.md](LOCAL_SETUP.md) for GitHub OAuth setup
-
----
-
-## 📁 Content Structure
-
-```
-content/
-├── home.json           # Homepage content
-├── siteSettings.json   # Site-wide settings (email, phone, address)
-├── services/           # Service items
-├── packages/           # Pricing packages
-├── team/               # Team member profiles
-└── works/              # Portfolio/project items (Markdown)
-
-public/images/          # Uploaded media files
-```
-
-All content is editable via the CMS at `/admin` or by editing files directly.
-
----
-
-## 🚀 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. Push to GitHub
-2. Import repo in Vercel
-3. Deploy (Vercel auto-detects Next.js)
-4. Configure GitHub OAuth for CMS (see [LOCAL_SETUP.md](LOCAL_SETUP.md))
-
-### Deploy with Docker
-
-Production build:
 ```powershell
-docker-compose up prod
+npm install --prefix frontend
+npm install --prefix backend
+npm run build --prefix frontend
+npm start --prefix backend
 ```
 
-Or build manually:
-```powershell
-docker build --target production -t studio-site .
-docker run -p 3000:3000 studio-site
-```
+Set `VITE_API_BASE_URL` in the frontend environment when the API is hosted separately. Set `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `SESSION_SECRET`, and `FRONTEND_ORIGIN` in the backend environment.
 
----
+## Deployment
 
-## 📚 Documentation
+### Vercel frontend
 
-- **[README_DOCKER.md](README_DOCKER.md)** - Docker quick start guide
-- **[DOCKER_SETUP.md](DOCKER_SETUP.md)** - Complete Docker documentation
-- **[LOCAL_SETUP.md](LOCAL_SETUP.md)** - Node.js setup and CMS configuration
+Create a Vercel project with the repository root directory set to `frontend`. Vercel uses `frontend/vercel.json`, runs `npm run build`, and publishes `dist`.
 
----
+Set `VITE_API_BASE_URL` to the deployed Render API URL.
 
-## 🛠️ Available Scripts
+### Render backend
 
-```bash
-npm run dev          # Start Next.js dev server
-npm run dev:cms      # Start dev server + CMS proxy
-npm run cms-proxy    # Start CMS local backend only
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-```
+Create a Render Web Service with the repository root directory set to `backend`. Render uses `backend/render.yaml`, runs `npm install`, and starts `npm start`. Attach the persistent disk configured in that file so the JSON store survives deploys.
 
----
-
-## 📝 Notes
-
-- Content is loaded at build time via `/lib/content.js` (static generation)
-- Contact form is static (configure external provider if needed)
-- CMS configured for local development by default
-- For production, configure GitHub backend in `public/admin/config.yml`
-
----
-
-## 🆘 Troubleshooting
-
-**Docker Issues:** See [DOCKER_SETUP.md](DOCKER_SETUP.md)  
-**Node.js Issues:** See [LOCAL_SETUP.md](LOCAL_SETUP.md)  
-**CMS Issues:** Check that local backend proxy is running on port 8081
-
----
-
-## 📄 License
-
-This project is open source and available for use.
-
+Set `FRONTEND_ORIGIN` to the deployed Vercel URL and configure the admin credentials and session secret in Render.
