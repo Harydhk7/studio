@@ -261,10 +261,11 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(2.8rem, 7vw, 6.5rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  font-family: "Style Script", cursive;
+  font-size: clamp(3.2rem, 8vw, 7.5rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
   margin-bottom: 24px;
   max-width: 840px;
 }
