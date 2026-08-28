@@ -34,6 +34,7 @@ Set `VITE_API_BASE_URL` in the frontend environment when the API is hosted separ
 Create a Vercel project with the repository root directory set to `frontend`. Vercel uses `frontend/vercel.json`, runs `npm run build`, and publishes `dist`.
 
 Set `VITE_API_BASE_URL` to the deployed Render API URL.
+Set `VITE_API_BASE_URL` in the Vercel project environment to the deployed Render API URL. For local builds, copy `.env.example` to `.env` in the repository root or set the variable in your shell.
 
 ### Render backend
 

@@ -60,6 +60,11 @@
       "active": true
     }
   ],
+  "slides": [
+    { "id": "slide-1", "image": "/images/portfolio.jpeg", "caption": "", "active": true, "order": 1 },
+    { "id": "slide-2", "image": "/images/babyshower.jpeg", "caption": "", "active": true, "order": 2 },
+    { "id": "slide-3", "image": "/images/babyshoot.jpeg", "caption": "", "active": true, "order": 3 }
+  ],
   "galleries": [
     {
       "id": "gal-wedding",
@@ -98,6 +103,11 @@
       "quote": "There were so many stunning photos to choose from. The team made it effortless.",
       "active": true
     }
+  ],
+  "vscoPhotos": [
+    { "id": "vsco-1", "image": "/images/portfolio.jpeg", "active": true },
+    { "id": "vsco-2", "image": "/images/babyshower.jpeg", "active": true },
+    { "id": "vsco-3", "image": "/images/babyshoot.jpeg", "active": true }
   ],
   "enquiries": [],
   "bookings": [],

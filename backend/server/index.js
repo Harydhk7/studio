@@ -48,6 +48,11 @@ const seed = {
     { id: "pkg-premium", title: "Premium Wedding", price: "Rs. 95,000", features: "Candid team, traditional team, teaser, album design, drone add-on ready", active: true },
     { id: "pkg-family", title: "Family Moments", price: "Rs. 18,000", features: "2-hour session, edited gallery, print-ready portraits", active: true },
   ],
+  slides: [
+    { id: "slide-1", image: "/images/portfolio.jpeg", caption: "", active: true, order: 1 },
+    { id: "slide-2", image: "/images/babyshower.jpeg", caption: "", active: true, order: 2 },
+    { id: "slide-3", image: "/images/babyshoot.jpeg", caption: "", active: true, order: 3 },
+  ],
   galleries: [
     { id: "gal-wedding", title: "Wedding Stories", image: "/images/portfolio.jpeg", category: "Wedding", featured: true },
     { id: "gal-shower", title: "Baby Shower", image: "/images/babyshower.jpeg", category: "Family", featured: true },
@@ -56,6 +61,11 @@ const seed = {
   testimonials: [
     { id: "t-1", name: "Varalakshmi & Karthik", event: "Wedding Album", quote: "The pictures turned out beautiful. We are so glad we chose Spot Freeze.", active: true },
     { id: "t-2", name: "Ashikha & Surya", event: "Pre-Wedding Shoot", quote: "There were so many stunning photos to choose from. The team made it effortless.", active: true },
+  ],
+  vscoPhotos: [
+    { id: "vsco-1", image: "/images/portfolio.jpeg", active: true },
+    { id: "vsco-2", image: "/images/babyshower.jpeg", active: true },
+    { id: "vsco-3", image: "/images/babyshoot.jpeg", active: true },
   ],
   enquiries: [],
   bookings: [],
@@ -110,9 +120,11 @@ function requireAdmin(req, res, next) {
 function publicData(data) {
   return {
     settings: data.settings,
+    slides: (data.slides || []).filter((item) => item.active).sort((a, b) => (a.order || 0) - (b.order || 0)),
     services: data.services.filter((item) => item.active),
     packages: data.packages.filter((item) => item.active),
     galleries: data.galleries,
+    vscoPhotos: (data.vscoPhotos || []).filter((item) => item.active),
     testimonials: data.testimonials.filter((item) => item.active),
   };
 }

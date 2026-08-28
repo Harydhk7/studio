@@ -1,6 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 
 const collectionConfig = {
+  slides: {
+    title: "Hero Slides",
+    description: "Manage the homepage slideshow images (4-5 photos recommended).",
+    primary: "image",
+    secondary: "order",
+    fields: [["image", "text"], ["caption", "text"], ["order", "text"], ["active", "checkbox"]],
+  },
+  vscoPhotos: {
+    title: "VSCO Gallery",
+    description: "Upload and manage photos shown in the masonry gallery below featured work.",
+    primary: "image",
+    secondary: "active",
+    fields: [["image", "text"], ["active", "checkbox"]],
+  },
   enquiries: {
     title: "Enquiries",
     description: "Review new photography enquiries and update follow-up status.",
@@ -73,6 +87,16 @@ const fallback = {
     phone: "+91 98765 43210",
     heroImage: "/images/portfolio.jpeg",
   },
+  slides: [
+    { id: "fallback-slide-1", image: "/images/portfolio.jpeg", caption: "", active: true, order: 1 },
+    { id: "fallback-slide-2", image: "/images/babyshower.jpeg", caption: "", active: true, order: 2 },
+    { id: "fallback-slide-3", image: "/images/babyshoot.jpeg", caption: "", active: true, order: 3 },
+  ],
+  vscoPhotos: [
+    { id: "fallback-vsco-1", image: "/images/portfolio.jpeg", active: true },
+    { id: "fallback-vsco-2", image: "/images/babyshower.jpeg", active: true },
+    { id: "fallback-vsco-3", image: "/images/babyshoot.jpeg", active: true },
+  ],
   services: [
     { id: "fallback-wedding", title: "Wedding Photography", description: "Full-day ritual, candid, portrait, and reception coverage.", price: "Custom quote" },
     { id: "fallback-prewedding", title: "Pre-Wedding Shoots", description: "Relaxed couple portraits with a cinematic finish.", price: "Custom quote" },
@@ -100,7 +124,12 @@ const fallback = {
   ],
 };
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+const API_BASE_URL = String(import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+
+function assetUrl(value) {
+  if (!value || !value.startsWith("/uploads/")) return value;
+  return `${API_BASE_URL}${value}`;
+}
 
 async function api(path, options = {}) {
   const token = localStorage.getItem("spotfreeze_admin_token");
@@ -207,6 +236,31 @@ function ContactPage({ navigate }) {
   );
 }
 
+function HeroSlider({ slides }) {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    if (slides.length < 2) return;
+    const t = setInterval(() => setCurrent((c) => (c + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [slides.length]);
+  return (
+    <div className="hero-slider">
+      {slides.map((slide, i) => (
+        <div key={slide.id} className={`hero-slide${i === current ? " active" : ""}`}>
+          <img src={assetUrl(slide.image) || slide.image} alt={slide.caption || ""} />
+        </div>
+      ))}
+      {slides.length > 1 && (
+        <div className="slider-dots">
+          {slides.map((_, i) => (
+            <button key={i} className={i === current ? "dot active" : "dot"} onClick={() => setCurrent(i)} aria-label={`Slide ${i + 1}`} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ProcessBand() {
   const steps = [
     ["01", "Plan", "Event flow, family priorities, locations, and must-have frames are mapped before shoot day."],
@@ -224,29 +278,17 @@ function ProcessBand() {
   );
 }
 
-function FeaturedRibbon() {
-  return (
-    <section className="featured-ribbon">
-      <div>
-        <p className="eyebrow">Studio promise</p>
-        <h2>Premium wedding and family stories, managed end to end.</h2>
-      </div>
-      <p>From enquiry to booking to final delivery, Spot Freeze now has a Sozolen-style management backend behind a polished photography front.</p>
-    </section>
-  );
-}
-
 function PublicSite({ navigate }) {
   const [data, setData] = useState(fallback);
   const [sent, setSent] = useState(false);
   useEffect(() => { api("/api/public").then(setData).catch(() => setData(fallback)); }, []);
-  const { settings, services, packages: packageList, galleries, testimonials } = data;
+  const { settings, slides = fallback.slides, services, packages: packageList, galleries, vscoPhotos = fallback.vscoPhotos, testimonials } = data;
   return (
     <>
       <Navbar navigate={navigate} />
       <main>
         <section className="hero">
-          <div className="hero-media"><img src={settings.heroImage} alt="Spot Freeze photography" /></div>
+          <HeroSlider slides={slides.length ? slides : fallback.slides} />
           <div className="hero-overlay" />
           <div className="hero-content">
             <p className="eyebrow">Wedding, family and event photography</p>
@@ -264,10 +306,21 @@ function PublicSite({ navigate }) {
         <section id="work" className="section">
           <div className="section-heading"><p className="eyebrow">Featured work</p><h2>Stories shaped with light, patience, and timing.</h2></div>
           <div className="portfolio-grid">
-            {galleries.map((item) => <article className="story-card" key={item.id}><img src={item.image} alt={item.title} /><div><h3>{item.title}</h3><p>{item.category}</p></div></article>)}
+            {galleries.map((item) => (
+              <article className="story-card" key={item.id}>
+                <img src={assetUrl(item.image) || item.image} alt={item.title} />
+                <div><h3>{item.title}</h3><p>{item.category}</p></div>
+              </article>
+            ))}
           </div>
         </section>
-        <FeaturedRibbon />
+        <section className="vsco-gallery">
+          {vscoPhotos.map((item) => (
+            <div className="vsco-item" key={item.id}>
+              <img src={assetUrl(item.image) || item.image} alt="" />
+            </div>
+          ))}
+        </section>
         <section id="services" className="split-section">
           <div><p className="eyebrow">Services</p><h2>Coverage built for weddings, families, and once-in-a-lifetime events.</h2><p>The public content comes from the full-stack API, so admin can update offerings without touching code.</p></div>
           <div className="service-list">{services.map((service) => <span key={service.id}><b>{service.title}</b><small>{service.description}</small><em>{service.price}</em></span>)}</div>
@@ -398,12 +451,12 @@ function ImageUpload({ value, onChange }) {
 function AdminPreview({ collection, item }) {
   const title = item?.title || item?.name || item?.clientName || "Preview title";
   const subtitle = item?.eventType || item?.category || item?.event || item?.price || "Live preview";
-  if (collection === "galleries") {
+  if (collection === "galleries" || collection === "vscoPhotos" || collection === "slides") {
     return (
       <div className="preview-phone">
         <article className="preview-story">
-          <img src={item?.image || "/images/portfolio.jpeg"} alt="" />
-          <div><h3>{title}</h3><p>{item?.category || "Wedding"}</p></div>
+          <img src={assetUrl(item?.image || "/images/portfolio.jpeg")} alt="" />
+          {collection === "galleries" && <div><h3>{title}</h3><p>{item?.category || "Wedding"}</p></div>}
         </article>
       </div>
     );
@@ -501,6 +554,8 @@ function AdminCollection({ collection }) {
         <form className="admin-form" onSubmit={save}>
           {config.fields.map(([field, type, options]) => <Field key={field} field={field} type={type} options={options} value={draft?.[field]} onChange={updateDraft} />)}
           {collection === "galleries" && <ImageUpload value={draft?.image} onChange={(value) => updateDraft("image", value)} />}
+          {collection === "slides" && <ImageUpload value={draft?.image} onChange={(value) => updateDraft("image", value)} />}
+          {collection === "vscoPhotos" && <ImageUpload value={draft?.image} onChange={(value) => updateDraft("image", value)} />}
           <button className="button primary" type="submit">Save</button><button className="button ghost" type="button" onClick={closeEditor}>Cancel</button>
         </form>
         <aside className="admin-preview-card">
@@ -542,7 +597,7 @@ function SettingsPanel() {
         <aside className="admin-preview-card">
           <div className="preview-header"><span>Home Preview</span><StatusBadge value="draft" /></div>
           <div className="preview-home">
-            <img src={draft.heroImage || "/images/portfolio.jpeg"} alt="" />
+            <img src={assetUrl(draft.heroImage || "/images/portfolio.jpeg")} alt="" />
             <div>
               <p>Wedding, family and event photography</p>
               <h3>{draft.studioName || settings.studioName}</h3>

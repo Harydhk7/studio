@@ -20,4 +20,5 @@ export default defineConfig({
       "/api": "http://localhost:5000",
     },
   },
+  envDir: path.resolve(process.cwd(), ".."),
 });
