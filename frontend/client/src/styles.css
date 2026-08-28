@@ -336,11 +336,14 @@ h3 {
   z-index: 1;
 }
 
-.story-card h3,
 .split-section h2,
 .section-heading h2,
 .featured-ribbon h2 {
   color: var(--brand);
+}
+
+.story-card h3 {
+  color: #fff;
 }
 
 .story-card p {
@@ -390,7 +393,7 @@ h3 {
 }
 
 .service-list em {
-  color: var(--brand);
+  color: var(--gold);
   font-style: normal;
 }
 
@@ -463,6 +466,57 @@ figcaption span {
 .contact-section p {
   color: rgba(255, 255, 255, 0.74);
   line-height: 1.7;
+}
+
+.contact-page {
+  background: var(--paper);
+  min-height: 100vh;
+}
+
+.contact-page-header {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding: 18px clamp(20px, 6vw, 88px);
+}
+
+.contact-page-header .brand img {
+  height: 48px;
+  width: 48px;
+}
+
+.contact-page-content {
+  align-items: start;
+  display: grid;
+  gap: clamp(36px, 8vw, 120px);
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  margin: 0 auto;
+  max-width: 1320px;
+  padding: clamp(72px, 10vw, 140px) clamp(20px, 6vw, 88px);
+}
+
+.contact-page-intro h1 {
+  color: var(--brand);
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  max-width: 650px;
+}
+
+.contact-page-intro > p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.contact-page-intro a {
+  color: var(--brand);
+  display: inline-block;
+  font-weight: 800;
+  margin-top: 14px;
+}
+
+.contact-page-form {
+  box-shadow: var(--shadow);
 }
 
 form {
@@ -1140,6 +1194,7 @@ textarea {
   .process-grid,
   .testimonial-grid,
   .contact-section,
+  .contact-page-content,
   form {
     grid-template-columns: 1fr;
   }

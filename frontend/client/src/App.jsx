@@ -130,12 +130,59 @@ function Navbar({ navigate }) {
         <button onClick={() => jump("#work")}>Work</button>
         <button onClick={() => jump("#services")}>Services</button>
         <button onClick={() => jump("#packages")}>Packages</button>
-        <button onClick={() => jump("#contact")}>Contact</button>
+        <button onClick={() => { setOpen(false); navigate("/contact"); }}>Contact</button>
         <button onClick={() => navigate("/admin")}>Admin</button>
       </nav>
-      <button className="nav-cta" onClick={() => jump("#contact")}>Book Now</button>
+      <button className="nav-cta" onClick={() => { setOpen(false); navigate("/contact"); }}>Contact</button>
       <button className="menu-button" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu"><span /><span /><span /></button>
     </header>
+  );
+}
+
+function ContactPage({ navigate }) {
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const submit = async (event) => {
+    event.preventDefault();
+    setError("");
+    try {
+      await api("/api/enquiries", { method: "POST", body: JSON.stringify(Object.fromEntries(new FormData(event.currentTarget))) });
+      event.currentTarget.reset();
+      setSent(true);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+  return (
+    <main className="contact-page">
+      <header className="contact-page-header">
+        <button className="brand link-button" onClick={() => navigate("/")}>
+          <img src="/images/spot-freeze-logo-4-1-.png" alt="Spot Freeze Photography logo" />
+          <span>Spot Freeze</span>
+        </button>
+        <button className="button ghost" onClick={() => navigate("/")}>Back to website</button>
+      </header>
+      <section className="contact-page-content">
+        <div className="contact-page-intro">
+          <p className="eyebrow">Contact Spot Freeze</p>
+          <h1>Let&apos;s plan the story you want to remember.</h1>
+          <p>Tell us about your celebration, shoot, or creative project. Our team will get back to you with the next steps.</p>
+          <a href="mailto:spofreezephotography@gmail.com">spofreezephotography@gmail.com</a>
+        </div>
+        <form className="contact-page-form" onSubmit={submit}>
+          <label>Name<input name="name" required /></label>
+          <label>Phone<input name="phone" required /></label>
+          <label>Email<input name="email" type="email" /></label>
+          <label>Service<select name="eventType"><option>Wedding photography</option><option>Pre-wedding shoot</option><option>Engagement shoot</option><option>Family or milestone shoot</option><option>Videography or editing</option><option>Corporate event</option><option>Other service</option></select></label>
+          <label>Preferred date<input name="eventDate" type="date" /></label>
+          <label>Venue or location<input name="venue" /></label>
+          <label className="full">Message<textarea name="message" rows="5" placeholder="Tell us a little about what you have in mind." /></label>
+          {error && <p className="error-note full">{error}</p>}
+          {sent && <p className="success-note full">Thank you. Your message has been sent to Spot Freeze.</p>}
+          <button className="button primary full" type="submit">Send Message</button>
+        </form>
+      </section>
+    </main>
   );
 }
 
@@ -482,5 +529,6 @@ function AdminApp({ route, navigate }) {
 
 export default function App() {
   const [route, navigate] = useRoute();
+  if (route === "/contact") return <ContactPage navigate={navigate} />;
   return route.startsWith("/admin") ? <AdminApp route={route} navigate={navigate} /> : <PublicSite navigate={navigate} />;
 }
