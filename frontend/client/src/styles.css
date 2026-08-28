@@ -245,7 +245,7 @@ h1 {
 }
 
 .stats-band {
-  background: #101828;
+  background: #000;
   color: #fff;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -336,6 +336,13 @@ h3 {
   z-index: 1;
 }
 
+.story-card h3,
+.split-section h2,
+.section-heading h2,
+.featured-ribbon h2 {
+  color: var(--brand);
+}
+
 .story-card p {
   color: rgba(255, 255, 255, 0.78);
   line-height: 1.55;
@@ -416,7 +423,7 @@ h3 {
 }
 
 .process-grid span {
-  color: var(--brand);
+  color: var(--gold);
   display: block;
   font-weight: 900;
   margin-bottom: 38px;

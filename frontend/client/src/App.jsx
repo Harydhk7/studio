@@ -108,6 +108,11 @@ function useRoute() {
   return [route, navigate];
 }
 
+function getAdminSection(route) {
+  const section = route.split("/")[2] || "dashboard";
+  return section === "dashboard" || section === "settings" || collectionConfig[section] ? section : "dashboard";
+}
+
 function Navbar({ navigate }) {
   const [open, setOpen] = useState(false);
   const jump = (id) => {
@@ -355,8 +360,15 @@ function AdminCollection({ collection }) {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const emptyItem = useMemo(() => Object.fromEntries(config.fields.map(([field, type]) => [field, type === "checkbox" ? true : ""])), [config]);
+  useEffect(() => {
+    let active = true;
+    setError("");
+    api(`/api/admin/${collection}`)
+      .then((result) => { if (active) setItems(result); })
+      .catch((err) => { if (active) setError(err.message); });
+    return () => { active = false; };
+  }, [collection]);
   const load = () => api(`/api/admin/${collection}`).then(setItems).catch((err) => setError(err.message));
-  useEffect(load, [collection]);
   const filtered = items.filter((item) => JSON.stringify(item).toLowerCase().includes(query.toLowerCase()));
   const openEditor = (item) => {
     setEditing(item);
@@ -443,7 +455,7 @@ function SettingsPanel() {
 
 function AdminApp({ route, navigate }) {
   const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("spotfreeze_admin_token")));
-  const section = route.split("/")[2] || "dashboard";
+  const section = getAdminSection(route);
   const navigateAdmin = (target) => navigate(target === "dashboard" ? "/admin" : `/admin/${target}`);
   if (!loggedIn) return <AdminLogin onLogin={() => setLoggedIn(true)} />;
   const nav = [["dashboard", "Dashboard"], ...Object.entries(collectionConfig).map(([key, value]) => [key, value.title]), ["settings", "Settings"]];
