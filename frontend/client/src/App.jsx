@@ -277,7 +277,7 @@ function PublicSite({ navigate }) {
           <div className="hero-content">
             <p className="eyebrow">Wedding, family and event photography</p>
             <h1>{settings.studioName}</h1>
-            <p>{settings.tagline}. We capture rituals, portraits, laughter, details, and the quiet seconds that make a day yours.</p>
+            <p>{settings.tagline}. We Freeze Your Golden Moments.</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}>Reserve a Date</button>
               <button className="button secondary" onClick={() => document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" })}>View Stories</button>
@@ -306,7 +306,7 @@ function PublicSite({ navigate }) {
           ))}
         </section>
         <section id="services" className="split-section">
-          <div><p className="eyebrow">Services</p><h2>Coverage built for weddings, families, and once-in-a-lifetime events.</h2><p>The public content comes from the full-stack API, so admin can update offerings without touching code.</p></div>
+          <div><p className="eyebrow">Services</p><h2>Coverage built for weddings, families, and once-in-a-lifetime events.</h2><p>A very comprehensive range of services to capture all your special moments.</p></div>
           <div className="service-list">{services.map((service) => <span key={service.id}><b>{service.title}</b><small>{service.description}</small><em>{service.price}</em></span>)}</div>
         </section>
         <section id="packages" className="section muted">
@@ -314,11 +314,11 @@ function PublicSite({ navigate }) {
           <div className="process-grid">{packageList.map((item) => <article key={item.id}><span>{item.price}</span><h3>{item.title}</h3><p>{item.features}</p></article>)}</div>
         </section>
         <section className="section">
-          <div className="section-heading"><p className="eyebrow">Client words</p><h2>Testimonials managed by admin.</h2></div>
+          <div className="section-heading"><p className="eyebrow">Client words</p><h2>Here's what our clients say about us.</h2></div>
           <div className="testimonial-grid">{testimonials.map((item) => <figure key={item.id}><blockquote>{item.quote}</blockquote><figcaption><strong>{item.name}</strong><span>{item.event}</span></figcaption></figure>)}</div>
         </section>
         <section id="contact" className="contact-section">
-          <div><p className="eyebrow">Booking enquiry</p><h2>New enquiries go straight into the admin dashboard.</h2><p>Admin can review, update status, create bookings, manage customers, and keep site content fresh.</p>{sent && <p className="success-note">Enquiry saved. The Spot Freeze team can now see it in admin.</p>}</div>
+          <div><p className="eyebrow">Booking enquiry</p><h2>Give us a call or send us a message and we'll get back to you as soon as possible.</h2><p>Admin will review your enquiry and get back to you as soon as possible.</p>{sent && <p className="success-note">Enquiry saved. The Spot Freeze team can now see it in admin.</p>}</div>
           <form onSubmit={async (event) => {
             event.preventDefault();
             const form = event.currentTarget;
@@ -333,7 +333,7 @@ function PublicSite({ navigate }) {
           </form>
         </section>
       </main>
-      <footer className="footer"><div><img src="/images/spot-freeze-logo-4-1-.png" alt="" /><p><strong>{settings.studioName}</strong><br />{settings.email} - {settings.phone}</p></div><p>2026 Spot Freeze Photography. Full-stack management site.</p></footer>
+      <footer className="footer"><div><img src="/images/dark version logo.png" alt="" /><p><strong>{settings.studioName}</strong><br />{settings.email} - {settings.phone}</p></div><p>2026 Spot Freeze Photography All rights reserved.</p></footer>
     </>
   );
 }

@@ -62,8 +62,8 @@ export const testimonials = [
 ];
 
 export const stats = [
-  ["500+", "Weddings"],
-  ["10+", "Years"],
-  ["25+", "Team Members"],
+  ["50+", "Weddings"],
+  ["3+", "Years"],
+  ["10", "Team Members"],
   ["8", "Locations"],
 ];
