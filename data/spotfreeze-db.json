@@ -1,0 +1,98 @@
+{
+  "settings": {
+    "studioName": "Spot Freeze Photography",
+    "tagline": "Transforming genuine happiness into eternal imagery",
+    "email": "hello@spotfreeze.in",
+    "phone": "+91 98765 43210",
+    "instagram": "https://www.instagram.com/",
+    "heroImage": "/images/portfolio.jpeg"
+  },
+  "services": [
+    {
+      "id": "svc-wedding",
+      "title": "Wedding Photography",
+      "description": "Full-day ritual, candid, portrait, and reception coverage.",
+      "price": "Custom quote",
+      "active": true
+    },
+    {
+      "id": "svc-prewedding",
+      "title": "Pre-Wedding Films",
+      "description": "Location planning, cinematic couple portraits, reels, and highlight films.",
+      "price": "From Rs. 25,000",
+      "active": true
+    },
+    {
+      "id": "svc-baby",
+      "title": "Baby & Family Shoots",
+      "description": "Baby shower, newborn, birthday, and family milestone sessions.",
+      "price": "From Rs. 12,000",
+      "active": true
+    }
+  ],
+  "packages": [
+    {
+      "id": "pkg-classic",
+      "title": "Classic Wedding",
+      "price": "Rs. 55,000",
+      "features": "1 photographer, 1 videographer, edited photos, highlight reel",
+      "active": true
+    },
+    {
+      "id": "pkg-premium",
+      "title": "Premium Wedding",
+      "price": "Rs. 95,000",
+      "features": "Candid team, traditional team, teaser, album design, drone add-on ready",
+      "active": true
+    },
+    {
+      "id": "pkg-family",
+      "title": "Family Moments",
+      "price": "Rs. 18,000",
+      "features": "2-hour session, edited gallery, print-ready portraits",
+      "active": true
+    }
+  ],
+  "galleries": [
+    {
+      "id": "gal-wedding",
+      "title": "Wedding Stories",
+      "image": "/images/portfolio.jpeg",
+      "category": "Wedding",
+      "featured": true
+    },
+    {
+      "id": "gal-shower",
+      "title": "Baby Shower",
+      "image": "/images/babyshower.jpeg",
+      "category": "Family",
+      "featured": true
+    },
+    {
+      "id": "gal-baby",
+      "title": "Baby Shoot",
+      "image": "/images/babyshoot.jpeg",
+      "category": "Portrait",
+      "featured": true
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t-1",
+      "name": "Varalakshmi & Karthik",
+      "event": "Wedding Album",
+      "quote": "The pictures turned out beautiful. We are so glad we chose Spot Freeze.",
+      "active": true
+    },
+    {
+      "id": "t-2",
+      "name": "Ashikha & Surya",
+      "event": "Pre-Wedding Shoot",
+      "quote": "There were so many stunning photos to choose from. The team made it effortless.",
+      "active": true
+    }
+  ],
+  "enquiries": [],
+  "bookings": [],
+  "customers": []
+}

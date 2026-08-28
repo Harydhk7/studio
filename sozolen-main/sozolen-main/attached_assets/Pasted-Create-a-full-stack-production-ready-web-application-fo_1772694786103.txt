@@ -1,0 +1,348 @@
+Create a full-stack production-ready web application for a small business that creates custom 3D models from customer photos.
+
+Business Workflow:
+Customers provide photos and requirements. The business creates custom 3D models using Autodesk tools and delivers them manually. Customers can also browse previously created models.
+
+The checkout process will NOT use any payment gateway. Instead, when customers finalize their order, the website should send all order details to a WhatsApp number (9876543210) so the business owner can manually communicate with the customer.
+
+------------------------------------------------
+
+TECH STACK
+
+Frontend:
+- Next.js (latest version with App Router)
+- TypeScript
+- TailwindCSS
+- shadcn/ui component library
+- Framer Motion
+- Three.js for 3D preview
+- React Hook Form
+- Zod validation
+
+Backend:
+- Node.js
+- Express.js
+- TypeScript
+- Prisma ORM
+
+Database:
+- PostgreSQL (SQLite for development)
+
+Storage:
+- Cloudinary or UploadThing for image uploads
+
+Authentication:
+- JWT based login
+- bcrypt password hashing
+
+Project Structure:
+Monorepo
+
+root
+  frontend (Next.js)
+  backend (Express API)
+
+------------------------------------------------
+
+CUSTOMER FACING WEBSITE
+
+Homepage
+
+Modern premium design like Apple product pages.
+
+Sections:
+
+Hero Section
+- Title explaining the 3D model service
+- CTA buttons
+- Framer Motion animations
+
+Parallax Scrolling Sections
+- Smooth Apple-style scroll animations
+- Explain workflow
+
+Step 1: Upload your photos  
+Step 2: We create a custom 3D model  
+Step 3: Receive your personalized model
+
+Showcase Section
+- Display example 3D models created
+- Interactive preview using Three.js
+
+Products Page
+
+Grid layout showing available models.
+
+Each product card shows:
+- Image
+- Title
+- Price
+- Short description
+- View details button
+
+Product Details Page
+
+- Large product image
+- Detailed description
+- Price
+- 3D Model preview using Three.js
+- Add to cart button
+
+Cart System
+
+Customer can:
+- Add products
+- Update quantity
+- Remove products
+
+------------------------------------------------
+
+CHECKOUT SYSTEM (WHATSAPP BASED)
+
+Create a checkout page.
+
+Checkout form fields:
+
+- Name
+- Phone number
+- Email
+- Address
+- Additional notes
+
+After clicking "Place Order":
+
+Instead of payment gateway:
+
+Generate a WhatsApp message that includes:
+
+Customer Details
+- Name
+- Phone
+- Email
+- Address
+
+Order Details
+- Product names
+- Quantity
+- Price
+- Total price
+
+Open WhatsApp with a pre-filled message using:
+
+https://wa.me/9876543210?text=
+
+Example message format:
+
+Hello, I want to place an order.
+
+Customer Name: John
+Phone: 999999999
+Address: Chennai
+
+Order Details:
+Product: Custom 3D Model A
+Quantity: 1
+Price: ₹3000
+
+Total: ₹3000
+
+Please contact me regarding this order.
+
+The user should be redirected to WhatsApp automatically after clicking Place Order.
+
+------------------------------------------------
+
+CUSTOM 3D MODEL REQUEST PAGE
+
+Customers can request a custom 3D model.
+
+Form fields:
+
+- Name
+- Email
+- Phone
+- Model description
+- Upload multiple images
+- Reference files
+
+Features:
+
+- Image preview
+- Upload progress
+- Validation with Zod
+
+After submission:
+- Save request to database
+- Upload images to Cloudinary
+- Status set to "Pending"
+
+------------------------------------------------
+
+ADMIN PANEL
+
+Admin Login Page
+
+Admin Dashboard Layout similar to Shopify.
+
+Sidebar navigation with:
+
+Dashboard
+Products
+Customer Requests
+Orders
+Logout
+
+Dashboard Overview:
+
+- Total products
+- Total custom requests
+- Total orders
+- Pending requests
+
+------------------------------------------------
+
+PRODUCT MANAGEMENT
+
+Admin can:
+
+Add product
+- Title
+- Description
+- Price
+- Upload image
+- Upload optional 3D model file
+
+Edit product
+
+Delete product
+
+------------------------------------------------
+
+CUSTOM REQUEST MANAGEMENT
+
+Admin can:
+
+View customer custom model requests
+
+See:
+- Name
+- Contact details
+- Description
+- Uploaded images
+
+Update status:
+
+Pending
+In Progress
+Completed
+
+------------------------------------------------
+
+DATABASE MODELS
+
+Product
+- id
+- title
+- description
+- price
+- imageUrl
+- model3dUrl
+- createdAt
+
+CustomRequest
+- id
+- name
+- email
+- phone
+- description
+- imageUrls
+- status
+- createdAt
+
+Order
+- id
+- name
+- phone
+- email
+- address
+- items
+- totalPrice
+- createdAt
+
+AdminUser
+- id
+- email
+- passwordHash
+- createdAt
+
+------------------------------------------------
+
+3D MODEL VIEWER
+
+Create reusable Three.js component:
+
+ModelViewer.tsx
+
+Features:
+- rotate
+- zoom
+- lighting
+- GLTF / GLB support
+
+------------------------------------------------
+
+UI DESIGN
+
+Use shadcn components:
+
+cards
+tables
+forms
+dialogs
+dropdowns
+sidebar
+
+Design should be:
+
+modern
+minimal
+premium ecommerce style
+mobile responsive
+
+------------------------------------------------
+
+ANIMATIONS
+
+Use Framer Motion for:
+
+page transitions
+hover effects
+scroll animations
+
+Add Parallax scrolling effects to sections.
+
+------------------------------------------------
+
+EXTRA FEATURES
+
+- image upload preview
+- loading skeletons
+- toast notifications
+- responsive design
+- SEO friendly pages
+
+------------------------------------------------
+
+DEPLOYMENT
+
+Frontend:
+Vercel ready
+
+Backend:
+Replit / Render ready
+
+Environment variables support.
+
+------------------------------------------------
+
+Generate full folder structure and working example pages.
