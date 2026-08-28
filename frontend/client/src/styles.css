@@ -337,9 +337,12 @@ h3 {
 }
 
 .split-section h2,
-.section-heading h2,
+.section-heading h2 {
+  color: #000;
+}
+
 .featured-ribbon h2 {
-  color: var(--brand);
+  color: #fff;
 }
 
 .story-card h3 {
@@ -497,7 +500,7 @@ figcaption span {
 }
 
 .contact-page-intro h1 {
-  color: var(--brand);
+  color: #000;
   font-size: clamp(3rem, 6vw, 6.5rem);
   max-width: 650px;
 }
@@ -517,6 +520,31 @@ figcaption span {
 
 .contact-page-form {
   box-shadow: var(--shadow);
+}
+
+.contact-page-logo {
+  height: clamp(150px, 20vw, 260px);
+  margin-bottom: 28px;
+  object-fit: contain;
+  object-position: left center;
+  width: clamp(150px, 20vw, 260px);
+}
+
+.image-upload {
+  background: #f8fafc;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.image-upload p,
+.image-upload small {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  margin: 0;
 }
 
 form {

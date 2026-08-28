@@ -73,17 +73,38 @@ const fallback = {
     phone: "+91 98765 43210",
     heroImage: "/images/portfolio.jpeg",
   },
-  services: [],
-  packages: [],
-  galleries: [],
-  testimonials: [],
+  services: [
+    { id: "fallback-wedding", title: "Wedding Photography", description: "Full-day ritual, candid, portrait, and reception coverage.", price: "Custom quote" },
+    { id: "fallback-prewedding", title: "Pre-Wedding Shoots", description: "Relaxed couple portraits with a cinematic finish.", price: "Custom quote" },
+    { id: "fallback-engagement", title: "Engagement Shoot", description: "Expressive portraits and intimate details for your promise.", price: "Custom quote" },
+    { id: "fallback-candid", title: "Candid Videography", description: "Story-led coverage of laughter, rituals, and in-between moments.", price: "Custom quote" },
+    { id: "fallback-maternity", title: "Maternity Shoot", description: "Warm, graceful portraits for this beautiful chapter.", price: "Custom quote" },
+    { id: "fallback-newborn", title: "Newborn Baby Shoot", description: "Gentle portraits for your newest family member.", price: "Custom quote" },
+    { id: "fallback-events", title: "Corporate Events", description: "Polished photography for conferences, launches, and teams.", price: "Custom quote" },
+    { id: "fallback-editing", title: "Candid Video Editing", description: "Cinematic editing, colour, sound, and story shaping.", price: "Custom quote" },
+    { id: "fallback-album", title: "Album Design", description: "Beautifully sequenced album layouts designed around your story.", price: "Custom quote" },
+    { id: "fallback-gifts", title: "Wedding Gifts", description: "Thoughtful wedding keepsakes and personalised gifts.", price: "Custom quote" },
+  ],
+  packages: [
+    { id: "fallback-classic", title: "Classic Wedding", price: "Rs. 55,000", features: "1 photographer, 1 videographer, edited photos, highlight reel" },
+    { id: "fallback-premium", title: "Premium Wedding", price: "Rs. 95,000", features: "Candid team, traditional team, teaser, and album design" },
+    { id: "fallback-family", title: "Family Moments", price: "Rs. 18,000", features: "2-hour session, edited gallery, and print-ready portraits" },
+  ],
+  galleries: [
+    { id: "fallback-wedding-story", title: "Wedding Stories", image: "/images/portfolio.jpeg", category: "Wedding" },
+    { id: "fallback-shower-story", title: "Baby Shower", image: "/images/babyshower.jpeg", category: "Family" },
+    { id: "fallback-baby-story", title: "Baby Shoot", image: "/images/babyshoot.jpeg", category: "Portrait" },
+  ],
+  testimonials: [
+    { id: "fallback-testimonial", name: "Varalakshmi & Karthik", event: "Wedding Album", quote: "The pictures turned out beautiful. We are so glad we chose Spot Freeze." },
+  ],
 };
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 async function api(path, options = {}) {
   const token = localStorage.getItem("spotfreeze_admin_token");
-  const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
+  const headers = { ...(options.body instanceof FormData ? {} : { "Content-Type": "application/json" }), ...(options.headers || {}) };
   if (token) headers.Authorization = `Bearer ${token}`;
   const response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   if (!response.ok) {
@@ -164,8 +185,8 @@ function ContactPage({ navigate }) {
       </header>
       <section className="contact-page-content">
         <div className="contact-page-intro">
-          <p className="eyebrow">Contact Spot Freeze</p>
-          <h1>Let&apos;s plan the story you want to remember.</h1>
+          <img className="contact-page-logo" src="/images/spot-freeze-logo-4-1-.png" alt="Spot Freeze Photography logo" />
+          <h1>Contact Spot Freeze</h1>
           <p>Tell us about your celebration, shoot, or creative project. Our team will get back to you with the next steps.</p>
           <a href="mailto:spofreezephotography@gmail.com">spofreezephotography@gmail.com</a>
         </div>
@@ -341,6 +362,39 @@ function Field({ field, type, options, value, onChange }) {
   return <label>{label}<input name={field} type={type} value={value || ""} onChange={(event) => onChange(field, event.target.value)} /></label>;
 }
 
+function ImageUpload({ value, onChange }) {
+  const [name, setName] = useState("");
+  const [file, setFile] = useState(null);
+  const [status, setStatus] = useState("");
+  const uploadImage = async () => {
+    if (!file || !name.trim()) {
+      setStatus("Choose an image and enter a file name first.");
+      return;
+    }
+    setStatus("Uploading...");
+    try {
+      const body = new FormData();
+      body.append("name", name);
+      body.append("image", file);
+      const result = await api("/api/admin/uploads", { method: "POST", body });
+      onChange(result.image);
+      setStatus(`Saved as ${result.name}`);
+    } catch (error) {
+      setStatus(error.message);
+    }
+  };
+  return (
+    <div className="image-upload full">
+      <label>Upload image<input type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => setFile(event.target.files?.[0] || null)} /></label>
+      <label>File name<input value={name} onChange={(event) => setName(event.target.value)} placeholder="wedding-story" /></label>
+      <p>Gallery recommendation: 1600 x 1200 px, JPG/PNG/WebP, maximum 5 MB. The extension is kept from the selected file.</p>
+      <button className="button ghost" type="button" onClick={uploadImage}>Upload and use image</button>
+      {value && <small>Current image: {value}</small>}
+      {status && <small>{status}</small>}
+    </div>
+  );
+}
+
 function AdminPreview({ collection, item }) {
   const title = item?.title || item?.name || item?.clientName || "Preview title";
   const subtitle = item?.eventType || item?.category || item?.event || item?.price || "Live preview";
@@ -446,6 +500,7 @@ function AdminCollection({ collection }) {
       {editing && <div className="admin-editor-grid">
         <form className="admin-form" onSubmit={save}>
           {config.fields.map(([field, type, options]) => <Field key={field} field={field} type={type} options={options} value={draft?.[field]} onChange={updateDraft} />)}
+          {collection === "galleries" && <ImageUpload value={draft?.image} onChange={(value) => updateDraft("image", value)} />}
           <button className="button primary" type="submit">Save</button><button className="button ghost" type="button" onClick={closeEditor}>Cancel</button>
         </form>
         <aside className="admin-preview-card">

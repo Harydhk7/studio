@@ -2,12 +2,14 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+import multer from "multer";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 const dataDir = path.join(rootDir, "data");
 const dataFile = path.join(dataDir, "spotfreeze-db.json");
+const uploadDir = path.join(dataDir, "uploads");
 const port = Number(process.env.PORT || 5000);
 const adminUsername = process.env.ADMIN_USERNAME || "admin";
 const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
@@ -62,6 +64,7 @@ const seed = {
 
 function ensureStore() {
   fs.mkdirSync(dataDir, { recursive: true });
+  fs.mkdirSync(uploadDir, { recursive: true });
   if (!fs.existsSync(dataFile)) {
     fs.writeFileSync(dataFile, JSON.stringify(seed, null, 2));
   }
@@ -115,6 +118,21 @@ function publicData(data) {
 }
 
 const app = express();
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: uploadDir,
+    filename: (_req, file, callback) => {
+      const requestedName = String(_req.body.name || path.parse(file.originalname).name)
+        .trim()
+        .replace(/[^a-zA-Z0-9_-]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .toLowerCase();
+      callback(null, `${requestedName || `image-${Date.now()}`}${path.extname(file.originalname).toLowerCase()}`);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_req, file, callback) => callback(null, ["image/jpeg", "image/png", "image/webp"].includes(file.mimetype)),
+});
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: false }));
 
@@ -167,6 +185,11 @@ app.post("/api/admin/login", (req, res) => {
     return res.status(401).json({ message: "Invalid credentials" });
   }
   res.json({ token: signToken({ username: adminUsername, role: "admin" }), user: { username: adminUsername, role: "admin" } });
+});
+
+app.post("/api/admin/uploads", requireAdmin, upload.single("image"), (req, res) => {
+  if (!req.file) return res.status(400).json({ message: "Choose a JPG, PNG, or WebP image under 5 MB" });
+  res.status(201).json({ image: `/uploads/${req.file.filename}`, name: req.file.filename });
 });
 
 app.get("/api/admin/dashboard", requireAdmin, (_req, res) => {
@@ -229,6 +252,7 @@ app.put("/api/admin/settings", requireAdmin, (req, res) => {
 });
 
 const distDir = path.join(rootDir, "dist");
+app.use("/uploads", express.static(uploadDir));
 if (fs.existsSync(distDir)) {
   app.use(express.static(distDir));
   app.get(/.*/, (_req, res) => res.sendFile(path.join(distDir, "index.html")));
