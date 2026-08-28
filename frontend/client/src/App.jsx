@@ -194,10 +194,11 @@ function ContactPage({ navigate }) {
   const [error, setError] = useState("");
   const submit = async (event) => {
     event.preventDefault();
+    const form = event.currentTarget;
     setError("");
     try {
-      await api("/api/enquiries", { method: "POST", body: JSON.stringify(Object.fromEntries(new FormData(event.currentTarget))) });
-      event.currentTarget.reset();
+      await api("/api/enquiries", { method: "POST", body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+      form.reset();
       setSent(true);
     } catch (err) {
       setError(err.message);
@@ -261,23 +262,6 @@ function HeroSlider({ slides }) {
   );
 }
 
-function ProcessBand() {
-  const steps = [
-    ["01", "Plan", "Event flow, family priorities, locations, and must-have frames are mapped before shoot day."],
-    ["02", "Capture", "A calm candid team covers rituals, portraits, details, and the emotional in-between moments."],
-    ["03", "Deliver", "Edited galleries, albums, reels, and final handover are tracked from the admin workflow."],
-  ];
-  return (
-    <section className="process-band">
-      <div className="section-heading">
-        <p className="eyebrow">How it works</p>
-        <h2>Clear process, quiet execution, beautiful delivery.</h2>
-      </div>
-      <div className="process-grid">{steps.map(([number, title, text]) => <article key={title}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
-    </section>
-  );
-}
-
 function PublicSite({ navigate }) {
   const [data, setData] = useState(fallback);
   const [sent, setSent] = useState(false);
@@ -329,7 +313,6 @@ function PublicSite({ navigate }) {
           <div className="section-heading"><p className="eyebrow">Packages</p><h2>Photography packages ready for enquiries and bookings.</h2></div>
           <div className="process-grid">{packageList.map((item) => <article key={item.id}><span>{item.price}</span><h3>{item.title}</h3><p>{item.features}</p></article>)}</div>
         </section>
-        <ProcessBand />
         <section className="section">
           <div className="section-heading"><p className="eyebrow">Client words</p><h2>Testimonials managed by admin.</h2></div>
           <div className="testimonial-grid">{testimonials.map((item) => <figure key={item.id}><blockquote>{item.quote}</blockquote><figcaption><strong>{item.name}</strong><span>{item.event}</span></figcaption></figure>)}</div>
@@ -338,8 +321,9 @@ function PublicSite({ navigate }) {
           <div><p className="eyebrow">Booking enquiry</p><h2>New enquiries go straight into the admin dashboard.</h2><p>Admin can review, update status, create bookings, manage customers, and keep site content fresh.</p>{sent && <p className="success-note">Enquiry saved. The Spot Freeze team can now see it in admin.</p>}</div>
           <form onSubmit={async (event) => {
             event.preventDefault();
-            await api("/api/enquiries", { method: "POST", body: JSON.stringify(Object.fromEntries(new FormData(event.currentTarget))) });
-            event.currentTarget.reset();
+            const form = event.currentTarget;
+            await api("/api/enquiries", { method: "POST", body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+            form.reset();
             setSent(true);
           }}>
             <label>Name<input name="name" required /></label><label>Phone<input name="phone" required /></label><label>Email<input name="email" type="email" /></label>
