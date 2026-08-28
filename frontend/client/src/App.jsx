@@ -277,7 +277,7 @@ function PublicSite({ navigate }) {
           <div className="hero-content">
             <p className="eyebrow">Wedding, family and event photography</p>
             <h1>{settings.studioName}</h1>
-            <p>{settings.tagline}. We Freeze Your Golden Moments.</p>
+            <p>{settings.tagline} We Freeze Your Golden Moments.</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}>Reserve a Date</button>
               <button className="button secondary" onClick={() => document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" })}>View Stories</button>
@@ -285,7 +285,7 @@ function PublicSite({ navigate }) {
           </div>
         </section>
         <section className="stats-band">
-          <div><strong>500+</strong><span>Weddings</span></div><div><strong>10+</strong><span>Years</span></div><div><strong>25+</strong><span>Team Members</span></div><div><strong>8</strong><span>Locations</span></div>
+          <div><strong>25+</strong><span>Weddings</span></div><div><strong>3+</strong><span>Years</span></div><div><strong>10</strong><span>Team Members</span></div><div><strong>8</strong><span>Locations</span></div>
         </section>
         <section id="work" className="section">
           <div className="section-heading"><p className="eyebrow">Featured work</p><h2>Stories shaped with light, patience, and timing.</h2></div>
