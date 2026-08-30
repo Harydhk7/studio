@@ -82,7 +82,7 @@ const collectionConfig = {
 const fallback = {
   settings: {
     studioName: "Spot Freeze Photography",
-    tagline: "We Freeze Your Golden Moments.",
+    tagline: "",
     email: "hello@spotfreeze.in",
     phone: "+91 98765 43210",
     heroImage: "/images/portfolio.jpeg",
@@ -277,7 +277,7 @@ function PublicSite({ navigate }) {
           <div className="hero-content">
             <p className="eyebrow">Wedding, family and event photography</p>
             <h1>{settings.studioName}</h1>
-            <p>{settings.tagline} We Freeze Your Golden Moments.</p>
+            <p>{settings.tagline} </p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}>Reserve a Date</button>
               <button className="button secondary" onClick={() => document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" })}>View Stories</button>

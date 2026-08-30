@@ -19,7 +19,7 @@ const frontendOrigin = process.env.FRONTEND_ORIGIN || "";
 const seed = {
   settings: {
     studioName: "Spot Freeze Photography",
-    tagline: "We Freeze Your Golden Moments.",
+    tagline: "",
     email: "hello@spotfreeze.in",
     phone: "+91 98765 43210",
     instagram: "https://www.instagram.com/",
