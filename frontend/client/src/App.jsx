@@ -193,11 +193,16 @@ function Navbar({ navigate }) {
 function PortfolioPage({ navigate }) {
   const [data, setData] = useState(fallback);
   const [category, setCategory] = useState("All stories");
+  const [selectedStory, setSelectedStory] = useState(null);
   useEffect(() => { document.title = "Portfolio | Spot Freeze Photography"; return () => { document.title = "Spot Freeze Photography"; }; }, []);
   useEffect(() => { api("/api/public").then(setData).catch(() => setData(fallback)); }, []);
   const galleries = data.galleries?.length ? data.galleries : fallback.galleries;
   const categories = ["All stories", ...new Set(galleries.map((item) => item.category).filter(Boolean))];
   const visible = category === "All stories" ? galleries : galleries.filter((item) => item.category === category);
+  const storyImages = selectedStory
+    ? visible.flatMap((item) => (Array.isArray(item.images) && item.images.length ? item.images : [item.image]).filter(Boolean))
+    : [];
+  const selectCategory = (value) => { setCategory(value); setSelectedStory(null); };
   return (
     <main className="portfolio-page">
       <header className="portfolio-page-header">
@@ -212,26 +217,26 @@ function PortfolioPage({ navigate }) {
         <h1>Stories worth returning to.</h1>
         <p>Browse wedding celebrations, family milestones, and portraits photographed with warmth and intention.</p>
       </section>
-      <section className="portfolio-categories" aria-label="Portfolio categories">
-        {categories.slice(1).map((item, index) => {
-          const first = galleries.find((gallery) => gallery.category === item);
-          return <button key={item} className="portfolio-category" onClick={() => setCategory(item)}>
-            <img src={assetUrl(first?.image) || first?.image} alt="" />
-            <span><small>{String(index + 1).padStart(2, "0")}</small><strong>{item}</strong><em>Explore stories</em></span>
-          </button>;
-        })}
-      </section>
       <section className="portfolio-results">
         <div className="portfolio-filter">
           <p className="eyebrow">Selected work</p>
-          <div>{categories.map((item) => <button key={item} className={category === item ? "active" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
+          <div>{categories.map((item) => <button key={item} className={category === item ? "active" : ""} onClick={() => selectCategory(item)}>{item}</button>)}</div>
         </div>
         <div className="portfolio-results-grid">
-          {visible.map((item) => <article className="portfolio-result" key={item.id}>
+          {visible.map((item) => <button className="portfolio-result" key={item.id} onClick={() => { setCategory(item.category || "All stories"); setSelectedStory(item); }} aria-label={`Open ${item.title}`}>
             <img src={assetUrl(item.image) || item.image} alt={item.title} />
             <div><p>{item.category}</p><h2>{item.title}</h2></div>
-          </article>)}
+          </button>)}
         </div>
+        {selectedStory && <section className="portfolio-detail" aria-label={`${selectedStory.title} gallery`}>
+          <div className="portfolio-detail-header">
+            <div><p className="eyebrow">{selectedStory.category}</p><h2>{selectedStory.title}</h2></div>
+            <button className="button ghost" onClick={() => setSelectedStory(null)}>Back to stories</button>
+          </div>
+          <div className="portfolio-detail-grid">
+            {storyImages.map((image, index) => <img key={`${image}-${index}`} src={assetUrl(image) || image} alt={`${selectedStory.title} ${index + 1}`} />)}
+          </div>
+        </section>}
       </section>
     </main>
   );

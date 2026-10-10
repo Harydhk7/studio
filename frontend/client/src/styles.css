@@ -1382,7 +1382,13 @@ textarea {
 }
 
 .portfolio-result {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
   margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 .portfolio-result img {
@@ -1407,6 +1413,45 @@ textarea {
 .portfolio-result h2 {
   font-size: 1.5rem;
   margin-bottom: 0;
+}
+
+.portfolio-result img {
+  transition: transform 400ms ease, opacity 400ms ease;
+}
+
+.portfolio-result:hover img {
+  opacity: 0.86;
+  transform: scale(1.02);
+}
+
+.portfolio-detail {
+  border-top: 1px solid var(--line);
+  margin: 72px auto 0;
+  max-width: 1320px;
+  padding-top: 38px;
+}
+
+.portfolio-detail-header {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.portfolio-detail-header h2 {
+  margin-bottom: 0;
+}
+
+.portfolio-detail-grid {
+  columns: 3;
+  column-gap: 14px;
+}
+
+.portfolio-detail-grid img {
+  break-inside: avoid;
+  display: block;
+  margin-bottom: 14px;
+  width: 100%;
 }
 
 @media (max-width: 900px) {
@@ -1518,6 +1563,16 @@ textarea {
 
   .portfolio-filter > div {
     justify-content: flex-start;
+  }
+
+  .portfolio-detail-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .portfolio-detail-grid {
+    columns: 2;
   }
 }
 
