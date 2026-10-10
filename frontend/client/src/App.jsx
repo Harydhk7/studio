@@ -177,7 +177,7 @@ function Navbar({ navigate }) {
         <span>Spot Freeze</span>
       </button>
       <nav className={open ? "nav-links open" : "nav-links"}>
-        <button onClick={() => jump("#work")}>Work</button>
+        <button onClick={() => jump("#gallery")}>Work</button>
         <button onClick={() => { setOpen(false); navigate("/portfolio"); }}>Portfolio +</button>
         <button onClick={() => jump("#services")}>Services</button>
         <button onClick={() => jump("#packages")}>Packages</button>
@@ -314,7 +314,7 @@ function PublicSite({ navigate }) {
   const [data, setData] = useState(fallback);
   const [sent, setSent] = useState(false);
   useEffect(() => { api("/api/public").then(setData).catch(() => setData(fallback)); }, []);
-  const { settings, slides = fallback.slides, services, packages: packageList, galleries, vscoPhotos = fallback.vscoPhotos, testimonials } = data;
+  const { settings, slides = fallback.slides, services, packages: packageList, vscoPhotos = fallback.vscoPhotos, testimonials } = data;
   return (
     <>
       <Navbar navigate={navigate} />
@@ -328,31 +328,23 @@ function PublicSite({ navigate }) {
             <p>{settings.tagline} </p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}>Reserve a Date</button>
-              <button className="button secondary" onClick={() => document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" })}>View Stories</button>
+              <button className="button secondary" onClick={() => document.querySelector("#gallery")?.scrollIntoView({ behavior: "smooth" })}>View Stories</button>
             </div>
           </div>
         </section>
         <section className="stats-band">
           <div><strong>25+</strong><span>Weddings</span></div><div><strong>3+</strong><span>Years</span></div><div><strong>10</strong><span>Team Members</span></div><div><strong>8</strong><span>Locations</span></div>
         </section>
-        <section id="work" className="section">
-          <div className="section-heading"><p className="eyebrow">Featured work</p><h2>Stories shaped with light, patience, and timing.</h2><button className="button ghost" onClick={() => navigate("/portfolio")}>View Portfolio +</button></div>
-          <div className="portfolio-grid">
-            {galleries.map((item) => (
-              <article className="story-card" key={item.id}>
-                <img src={assetUrl(item.image) || item.image} alt={item.title} />
-                <div><h3>{item.title}</h3><p>{item.category}</p></div>
-              </article>
-            ))}
-          </div>
-        </section>
-        <section className="vsco-gallery">
+        <section id="gallery" className="vsco-gallery">
           {vscoPhotos.map((item) => (
             <div className="vsco-item" key={item.id}>
               <img src={assetUrl(item.image) || item.image} alt="" />
             </div>
           ))}
         </section>
+        <div className="gallery-cta">
+          <button className="button ghost" onClick={() => navigate("/portfolio")}>View Portfolio</button>
+        </div>
         <section id="services" className="split-section">
           <div><p className="eyebrow">Services</p><h2>Coverage built for weddings, families, and once-in-a-lifetime events.</h2><p>A very comprehensive range of services to capture all your special moments.</p></div>
           <div className="service-list">{services.map((service) => <span key={service.id}><b>{service.title}</b><small>{service.description}</small><em>{service.price}</em></span>)}</div>

@@ -358,6 +358,12 @@ h3 {
   transform: scale(1.02);
 }
 
+.gallery-cta {
+  display: flex;
+  justify-content: center;
+  padding: 42px 20px 88px;
+}
+
 .portfolio-grid {
   display: grid;
   gap: 20px;
