@@ -335,6 +335,9 @@ function PublicSite({ navigate }) {
         <section className="stats-band">
           <div><strong>25+</strong><span>Weddings</span></div><div><strong>3+</strong><span>Years</span></div><div><strong>10</strong><span>Team Members</span></div><div><strong>8</strong><span>Locations</span></div>
         </section>
+        <section className="section gallery-heading">
+          <div className="section-heading"><p className="eyebrow">Featured work</p><h2>Stories shaped with light, patience, and timing.</h2></div>
+        </section>
         <section id="gallery" className="vsco-gallery">
           {vscoPhotos.map((item) => (
             <div className="vsco-item" key={item.id}>
