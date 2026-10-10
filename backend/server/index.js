@@ -12,9 +12,12 @@ const dataFile = path.join(dataDir, "spotfreeze-db.json");
 const uploadDir = path.join(dataDir, "uploads");
 const port = Number(process.env.PORT || 5000);
 const adminUsername = process.env.ADMIN_USERNAME || "admin";
-const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
+const adminPassword = process.env.ADMIN_PASSWORD || "";
 const sessionSecret = process.env.SESSION_SECRET || "spotfreeze-local-secret";
 const frontendOrigin = process.env.FRONTEND_ORIGIN || "";
+const resendApiKey = process.env.RESEND_API_KEY || "";
+const notificationEmail = process.env.NOTIFICATION_EMAIL || "spofreezephotography@gmail.com";
+const senderEmail = process.env.SENDER_EMAIL || "hello@spotfreezephotography.in";
 
 const seed = {
   settings: {
@@ -129,6 +132,26 @@ function publicData(data) {
   };
 }
 
+async function notifyEnquiry(enquiry) {
+  if (!resendApiKey) return;
+  const details = [
+    `Name: ${enquiry.name}`,
+    `Phone: ${enquiry.phone}`,
+    `Email: ${enquiry.email || "Not provided"}`,
+    `Event: ${enquiry.eventType}`,
+    `Date: ${enquiry.eventDate || "Not provided"}`,
+    `Venue: ${enquiry.venue || "Not provided"}`,
+    "",
+    enquiry.message || "No message provided",
+  ].join("\n");
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${resendApiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: `Spot Freeze website <${senderEmail}>`, to: [notificationEmail], reply_to: enquiry.email || undefined, subject: `New enquiry from ${enquiry.name}`, text: details }),
+  });
+  if (!response.ok) throw new Error(`Email provider returned ${response.status}`);
+}
+
 const app = express();
 const upload = multer({
   storage: multer.diskStorage({
@@ -189,6 +212,7 @@ app.post("/api/enquiries", (req, res) => {
     data.customers.unshift({ id: id("cus"), name: enquiry.name, phone: enquiry.phone, email: enquiry.email, notes: "", createdAt: enquiry.createdAt });
   }
   writeStore(data);
+  notifyEnquiry(enquiry).catch((error) => console.error("Could not send enquiry notification:", error.message));
   res.status(201).json(enquiry);
 });
 

@@ -178,6 +178,7 @@ function Navbar({ navigate }) {
       </button>
       <nav className={open ? "nav-links open" : "nav-links"}>
         <button onClick={() => jump("#work")}>Work</button>
+        <button onClick={() => { setOpen(false); navigate("/portfolio"); }}>Portfolio +</button>
         <button onClick={() => jump("#services")}>Services</button>
         <button onClick={() => jump("#packages")}>Packages</button>
         <button onClick={() => { setOpen(false); navigate("/contact"); }}>Contact</button>
@@ -186,6 +187,53 @@ function Navbar({ navigate }) {
       <button className="nav-cta" onClick={() => { setOpen(false); navigate("/contact"); }}>Contact</button>
       <button className="menu-button" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu"><span /><span /><span /></button>
     </header>
+  );
+}
+
+function PortfolioPage({ navigate }) {
+  const [data, setData] = useState(fallback);
+  const [category, setCategory] = useState("All stories");
+  useEffect(() => { document.title = "Portfolio | Spot Freeze Photography"; return () => { document.title = "Spot Freeze Photography"; }; }, []);
+  useEffect(() => { api("/api/public").then(setData).catch(() => setData(fallback)); }, []);
+  const galleries = data.galleries?.length ? data.galleries : fallback.galleries;
+  const categories = ["All stories", ...new Set(galleries.map((item) => item.category).filter(Boolean))];
+  const visible = category === "All stories" ? galleries : galleries.filter((item) => item.category === category);
+  return (
+    <main className="portfolio-page">
+      <header className="portfolio-page-header">
+        <button className="brand link-button" onClick={() => navigate("/")}>
+          <img src="/images/spot-freeze-logo-4-1-.png" alt="Spot Freeze Photography logo" />
+          <span>Spot Freeze</span>
+        </button>
+        <button className="button ghost" onClick={() => navigate("/contact")}>Reserve a Date</button>
+      </header>
+      <section className="portfolio-intro">
+        <p className="eyebrow">The portfolio</p>
+        <h1>Stories worth returning to.</h1>
+        <p>Browse wedding celebrations, family milestones, and portraits photographed with warmth and intention.</p>
+      </section>
+      <section className="portfolio-categories" aria-label="Portfolio categories">
+        {categories.slice(1).map((item, index) => {
+          const first = galleries.find((gallery) => gallery.category === item);
+          return <button key={item} className="portfolio-category" onClick={() => setCategory(item)}>
+            <img src={assetUrl(first?.image) || first?.image} alt="" />
+            <span><small>{String(index + 1).padStart(2, "0")}</small><strong>{item}</strong><em>Explore stories</em></span>
+          </button>;
+        })}
+      </section>
+      <section className="portfolio-results">
+        <div className="portfolio-filter">
+          <p className="eyebrow">Selected work</p>
+          <div>{categories.map((item) => <button key={item} className={category === item ? "active" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
+        </div>
+        <div className="portfolio-results-grid">
+          {visible.map((item) => <article className="portfolio-result" key={item.id}>
+            <img src={assetUrl(item.image) || item.image} alt={item.title} />
+            <div><p>{item.category}</p><h2>{item.title}</h2></div>
+          </article>)}
+        </div>
+      </section>
+    </main>
   );
 }
 
@@ -288,7 +336,7 @@ function PublicSite({ navigate }) {
           <div><strong>25+</strong><span>Weddings</span></div><div><strong>3+</strong><span>Years</span></div><div><strong>10</strong><span>Team Members</span></div><div><strong>8</strong><span>Locations</span></div>
         </section>
         <section id="work" className="section">
-          <div className="section-heading"><p className="eyebrow">Featured work</p><h2>Stories shaped with light, patience, and timing.</h2></div>
+          <div className="section-heading"><p className="eyebrow">Featured work</p><h2>Stories shaped with light, patience, and timing.</h2><button className="button ghost" onClick={() => navigate("/portfolio")}>View Portfolio +</button></div>
           <div className="portfolio-grid">
             {galleries.map((item) => (
               <article className="story-card" key={item.id}>
@@ -624,5 +672,6 @@ function AdminApp({ route, navigate }) {
 export default function App() {
   const [route, navigate] = useRoute();
   if (route === "/contact") return <ContactPage navigate={navigate} />;
+  if (route === "/portfolio") return <PortfolioPage navigate={navigate} />;
   return route.startsWith("/admin") ? <AdminApp route={route} navigate={navigate} /> : <PublicSite navigate={navigate} />;
 }

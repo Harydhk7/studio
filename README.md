@@ -41,3 +41,19 @@ Set `VITE_API_BASE_URL` in the Vercel project environment to the deployed Render
 Create a Render Web Service with the repository root directory set to `backend`. Render uses `backend/render.yaml`, runs `npm install`, and starts `npm start`. Attach the persistent disk configured in that file so the JSON store survives deploys.
 
 Set `FRONTEND_ORIGIN` to the deployed Vercel URL and configure the admin credentials and session secret in Render.
+
+### Free enquiry email notifications
+
+The enquiry API stores every submission and can notify an inbox through Resend's free tier. Create a Resend account, add and verify `spotfreezephotography.in`, and add these DNS records in Cloudflare exactly as Resend shows them. Keep Cloudflare proxying enabled only where Resend permits it; mail-related records should remain DNS-only.
+
+Add these Render environment variables:
+
+- `RESEND_API_KEY`: the Resend API key
+- `SENDER_EMAIL`: a verified sender such as `hello@spotfreezephotography.in`
+- `NOTIFICATION_EMAIL`: the personal inbox where enquiries should arrive
+
+Cloudflare Email Routing can separately create `hello@spotfreezephotography.in` and forward incoming mail to a personal inbox. Email Routing is for receiving mail; Resend handles the website notification sent by the API.
+
+### Search engine indexing
+
+The frontend includes `robots.txt`, `sitemap.xml`, canonical metadata, and social metadata. In Google Search Console, add the domain property, verify it with the DNS TXT record Google provides in Cloudflare, submit `https://spotfreezephotography.in/sitemap.xml`, and request indexing for the home, portfolio, and contact URLs. Also add the site to Bing Webmaster Tools and submit the same sitemap. Indexing is not immediate, and a new domain can take days or weeks to appear.

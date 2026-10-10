@@ -14,6 +14,12 @@ services:
         generateValue: true
       - key: FRONTEND_ORIGIN
         sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: NOTIFICATION_EMAIL
+        sync: false
+      - key: SENDER_EMAIL
+        sync: false
     disk:
       name: spotfreeze-data
       mountPath: /opt/render/project/src/backend/data
