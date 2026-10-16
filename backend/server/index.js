@@ -16,14 +16,14 @@ const adminPassword = process.env.ADMIN_PASSWORD || "";
 const sessionSecret = process.env.SESSION_SECRET || "spotfreeze-local-secret";
 const frontendOrigin = process.env.FRONTEND_ORIGIN || "";
 const resendApiKey = process.env.RESEND_API_KEY || "";
-const notificationEmail = process.env.NOTIFICATION_EMAIL || "spofreezephotography@gmail.com";
+const notificationEmail = process.env.NOTIFICATION_EMAIL || "spotfreezephotography@gmail.com";
 const senderEmail = process.env.SENDER_EMAIL || "hello@spotfreezephotography.in";
 
 const seed = {
   settings: {
     studioName: "Spot Freeze Photography",
     tagline: "",
-    email: "hello@spotfreeze.in",
+    email: "hello@spotfreezephotography.in",
     phone: "+91 98765 43210",
     instagram: "https://www.instagram.com/",
     heroImage: "/images/portfolio.jpeg",

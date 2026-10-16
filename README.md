@@ -36,11 +36,15 @@ Create a Vercel project with the repository root directory set to `frontend`. Ve
 Set `VITE_API_BASE_URL` to the deployed Render API URL.
 Set `VITE_API_BASE_URL` in the Vercel project environment to the deployed Render API URL. For local builds, copy `.env.example` to `.env` in the repository root or set the variable in your shell.
 
+For `spotfreezephotography.in`, add the domain to the Vercel project and set the production variable to the exact Render URL, for example `https://spotfreeze-api.onrender.com` (without a trailing slash). Redeploy after changing environment variables.
+
 ### Render backend
 
 Create a Render Web Service with the repository root directory set to `backend`. Render uses `backend/render.yaml`, runs `npm install`, and starts `npm start`. Attach the persistent disk configured in that file so the JSON store survives deploys.
 
 Set `FRONTEND_ORIGIN` to the deployed Vercel URL and configure the admin credentials and session secret in Render.
+
+For the custom domain, set `FRONTEND_ORIGIN` to the exact browser origin that serves the site, such as `https://spotfreezephotography.in`. If `www` is also configured in Vercel, use the origin that visitors actually use; update this value if the canonical domain changes. Confirm `https://<your-render-service>.onrender.com/api/health` returns `{"ok":true,"service":"spotfreeze-api"}` before testing the form.
 
 ### Free enquiry email notifications
 
@@ -51,6 +55,8 @@ Add these Render environment variables:
 - `RESEND_API_KEY`: the Resend API key
 - `SENDER_EMAIL`: a verified sender such as `hello@spotfreezephotography.in`
 - `NOTIFICATION_EMAIL`: the personal inbox where enquiries should arrive
+
+Use `spotfreezephotography@gmail.com` (or the inbox you actually monitor) for `NOTIFICATION_EMAIL`. `SENDER_EMAIL` must be a mailbox on the verified `spotfreezephotography.in` domain, such as `hello@spotfreezephotography.in`. Do not use a Gmail address as the `from` address.
 
 Cloudflare Email Routing can separately create `hello@spotfreezephotography.in` and forward incoming mail to a personal inbox. Email Routing is for receiving mail; Resend handles the website notification sent by the API.
 

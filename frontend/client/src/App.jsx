@@ -83,7 +83,7 @@ const fallback = {
   settings: {
     studioName: "Spot Freeze Photography",
     tagline: "",
-    email: "hello@spotfreeze.in",
+    email: "hello@spotfreezephotography.in",
     phone: "+91 98765 43210",
     heroImage: "/images/portfolio.jpeg",
   },
@@ -173,7 +173,7 @@ function Navbar({ navigate }) {
   return (
     <header className="site-header">
       <button className="brand link-button" onClick={() => navigate("/")}>
-        <img src="/images/spot-freeze-logo-4-1-.png" alt="" />
+        <img src="/images/spotfreezelogo.png" alt="Spot Freeze Photography logo" />
         <span>Spot Freeze</span>
       </button>
       <nav className={open ? "nav-links open" : "nav-links"}>
@@ -271,7 +271,7 @@ function ContactPage({ navigate }) {
           <img className="contact-page-logo" src="/images/spot-freeze-logo-4-1-.png" alt="Spot Freeze Photography logo" />
           <h1>Contact Spot Freeze</h1>
           <p>Tell us about your celebration, shoot, or creative project. Our team will get back to you with the next steps.</p>
-          <a href="mailto:spofreezephotography@gmail.com">spofreezephotography@gmail.com</a>
+          <a href="mailto:spotfreezephotography@gmail.com">spotfreezephotography@gmail.com</a>
         </div>
         <form className="contact-page-form" onSubmit={submit}>
           <label>Name<input name="name" required /></label>
@@ -381,7 +381,7 @@ function PublicSite({ navigate }) {
           </form>
         </section>
       </main>
-      <footer className="footer"><div><img src="/images/dark version logo.png" alt="" /><p><strong>{settings.studioName}</strong><br />{settings.email} - {settings.phone}</p></div><p>2026 Spot Freeze Photography All rights reserved.</p></footer>
+      <footer className="footer"><div><img src="/images/spotfreezelogo.png" alt="Spot Freeze Photography logo" /><p><strong>{settings.studioName}</strong><br />{settings.email} - {settings.phone}</p></div><p>2026 Spot Freeze Photography All rights reserved.</p></footer>
     </>
   );
 }
