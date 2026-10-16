@@ -173,7 +173,7 @@ function Navbar({ navigate }) {
   return (
     <header className="site-header">
       <button className="brand link-button" onClick={() => navigate("/")}>
-        <img src="/images/spotfreezelogo.png" alt="Spot Freeze Photography logo" />
+        <img src="/images/spot-freeze-logo-4-1-.png" alt="Spot Freeze Photography logo" />
         <span>Spot Freeze</span>
       </button>
       <nav className={open ? "nav-links open" : "nav-links"}>
